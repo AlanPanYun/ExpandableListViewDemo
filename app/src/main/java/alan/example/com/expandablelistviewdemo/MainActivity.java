@@ -1,7 +1,9 @@
 package alan.example.com.expandablelistviewdemo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -25,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
         elView = (ExpandableListView) findViewById(R.id.el_view);
 //        elView.setGroupIndicator(null);
 
-        int width = getWindowManager().getDefaultDisplay().getWidth();
-        elView.setIndicatorBounds(width - 40, width );
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        elView.setIndicatorBounds(dm.widthPixels - 40, dm.widthPixels);
         elView.setAdapter(new MyExpandableListAdapter(this));
         //        设置分组项的点击监听事件
         elView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -38,13 +41,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 //        设置子选项点击监听事件
-        elView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
-
-        {
+        elView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                         int childPosition, long id) {
                 Toast.makeText(getApplicationContext(), childStrings[groupPosition][childPosition], Toast.LENGTH_SHORT).show();
+                if (v.isSelected()) {
+                    v.setSelected(false);
+                    v.setBackgroundColor(Color.WHITE);
+                } else {
+                    v.setBackgroundColor(Color.RED);
+                    v.setSelected(true);
+                }
                 return true;
             }
         });
