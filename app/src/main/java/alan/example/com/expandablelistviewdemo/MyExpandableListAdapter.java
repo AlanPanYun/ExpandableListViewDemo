@@ -15,7 +15,6 @@ public class MyExpandableListAdapter implements android.widget.ExpandableListAda
 
     private Context mContext;
 
-
     public String[] groupStrings = {"西游记", "水浒传", "三国演义", "红楼梦"};
     public String[][] childStrings = {
             {"唐三藏", "孙悟空", "猪八戒", "沙和尚"},
@@ -78,9 +77,14 @@ public class MyExpandableListAdapter implements android.widget.ExpandableListAda
     public boolean hasStableIds() {
         return true;
     }
+
     //        获取显示指定分组的视图
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+    public View getGroupView(
+            int groupPosition,
+            boolean isExpanded,
+            View convertView,
+            ViewGroup parent) {
         GroupViewHolder groupViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_expand_group, parent, false);
@@ -96,7 +100,12 @@ public class MyExpandableListAdapter implements android.widget.ExpandableListAda
 
     //        获取显示指定分组中的指定子选项的视图
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(
+            int groupPosition,
+            int childPosition,
+            boolean isLastChild,
+            View convertView,
+            ViewGroup parent) {
         ChildViewHolder childViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_expand_child, parent, false);
@@ -149,6 +158,7 @@ public class MyExpandableListAdapter implements android.widget.ExpandableListAda
     static class GroupViewHolder {
         TextView tvTitle;
     }
+
     static class ChildViewHolder {
         TextView tvTitle;
     }

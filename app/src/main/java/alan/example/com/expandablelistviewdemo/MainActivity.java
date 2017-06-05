@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         elView = (ExpandableListView) findViewById(R.id.el_view);
+//        elView.setGroupIndicator(null);
+
+        int width = getWindowManager().getDefaultDisplay().getWidth();
+        elView.setIndicatorBounds(width - 40, width );
         elView.setAdapter(new MyExpandableListAdapter(this));
         //        设置分组项的点击监听事件
         elView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
